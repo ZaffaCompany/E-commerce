@@ -100,8 +100,6 @@
                                                     </form>
                                                 </td>
 
-
-
                                                 <td class="product-thumbnail">
                                                     <a href="{{ route('shop.show', $item->model->slug) }}"><img
                                                             width="145" height="145" alt="poster_1_up"
@@ -128,7 +126,6 @@
                                                 <td class="product-subtotal">
                                                     <span class="amount">£15.00</span>
                                                 </td>
-
                                         </tr>
                                         @endforeach
 
