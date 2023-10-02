@@ -95,7 +95,7 @@
             <div class="col-sm-6">
                 <div class="shopping-item">
 
-                    <a href="{{ route('cart.index') }}">Cart - <span class="cart-amunt">$100</span>
+                    <a href="{{ route('cart.index') }}">Cart - <span class="cart-amunt">${{ Cart::total() }}</span>
                         <i class="fa fa-shopping-cart"></i>
                         @if(Cart::instance('default')->count() > 0)
                         <span class="product-count">
