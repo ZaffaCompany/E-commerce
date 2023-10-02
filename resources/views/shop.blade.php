@@ -29,7 +29,13 @@
                             </div>
 
                             <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                                <form action="{{ route('cart.store') }}" method="POST" class="cart">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    <input type="hidden" name="price" value="{{ $product->price }}">
+                                    <button class="add_to_cart_button" type="submit">Add to cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>

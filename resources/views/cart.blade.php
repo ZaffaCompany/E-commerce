@@ -190,17 +190,17 @@
                                         <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span></td>
+                                            <td><span class="amount">${{ Cart::subtotal() }}</span></td>
                                         </tr>
 
                                         <tr class="shipping">
-                                            <th>Shipping and Handling</th>
-                                            <td>Free Shipping</td>
+                                            <th>Tax</th>
+                                            <td>${{ Cart::tax() }}</td>
                                         </tr>
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong></td>
+                                            <td><strong><span class="amount">${{ Cart::total() }}</span></strong></td>
                                         </tr>
                                         </tbody>
                                     </table>

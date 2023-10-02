@@ -12,7 +12,8 @@
     <title>Ustora Demo</title>
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet'
+          type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
@@ -55,7 +56,9 @@
                 <div class="header-right">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                    class="key">currency :</span><span class="value">USD </span><b
+                                    class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">USD</a></li>
                                 <li><a href="#">INR</a></li>
@@ -64,7 +67,9 @@
                         </li>
 
                         <li class="dropdown dropdown-small">
-                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                    class="key">language :</span><span class="value">English </span><b
+                                    class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">English</a></li>
                                 <li><a href="#">French</a></li>
@@ -89,8 +94,16 @@
 
             <div class="col-sm-6">
                 <div class="shopping-item">
-                    <a href="cart.html">Cart - <span class="cart-amunt">$100</span> <i
-                            class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+
+                    <a href="{{ route('cart.index') }}">Cart - <span class="cart-amunt">$100</span>
+                        <i class="fa fa-shopping-cart"></i>
+                        @if(Cart::instance('default')->count() > 0)
+                        <span class="product-count">
+                                {{ Cart::instance('default')->count() }}
+                            @endif
+                            </span>
+                    </a>
+
                 </div>
             </div>
         </div>
@@ -110,8 +123,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a href="{{ route('landing-page') }}">Home</a></li>
-                    <li class="{{ Request::path() == '/shop' ? 'active' : '' }}"><a href="{{ route('shop.index') }}">Shop page</a></li>
+                    <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a
+                            href="{{ route('landing-page') }}">Home</a></li>
+                    <li class="{{ Request::path() == '/shop' ? 'active' : '' }}"><a href="{{ route('shop.index') }}">Shop
+                            page</a></li>
                     <li><a href="{{ route('cart.index') }}">Cart</a></li>
                     <li><a href="#">Category</a></li>
                     <li><a href="#">Others</a></li>
@@ -129,7 +144,8 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com" target="_blank">freshDesignweb.com</a></p>
+                    <p>&copy; 2015 uCommerce. All Rights Reserved. <a href="http://www.freshdesignweb.com"
+                                                                      target="_blank">freshDesignweb.com</a></p>
                 </div>
             </div>
 
