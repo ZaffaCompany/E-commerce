@@ -92,11 +92,21 @@
                                                 </form>
 
                                                 <td class="product-remove">
-                                                    <form action="{{ route('cart.destroy', $item->rowId) }}" method="POST">
+                                                    <form action="{{ route('cart.destroy', $item->rowId) }}"
+                                                          method="POST">
                                                         @csrf
                                                         @method('delete')
 
                                                         <button type="submit" class="cart-options">Remove</button>
+                                                    </form>
+
+                                                    <form
+                                                        action="{{ route('cart.switchToSaveForLater', $item->rowId) }}"
+                                                        method="POST">
+                                                        @csrf
+
+                                                        <button type="submit" class="cart-options">Save for Later
+                                                        </button>
                                                     </form>
                                                 </td>
 
@@ -153,8 +163,9 @@
 
                                     </tbody>
                                 </table>
-
                             </form>
+
+
 
 
                             <div class="cart-collaterals">
@@ -205,6 +216,8 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+
 
 
                                 <form method="post" action="#" class="shipping_calculator">
@@ -465,6 +478,7 @@
                                             </select>
                                         </p>
 
+
                                         <p class="form-row form-row-wide"><input type="text" id="calc_shipping_state"
                                                                                  name="calc_shipping_state"
                                                                                  placeholder="State / county" value=""
@@ -486,7 +500,96 @@
                                 </form>
 
 
+
+
                             </div>
+                            <h1>Save for later</h1>
+                            <form method="post" action="#">
+                                <table cellspacing="0" class="shop_table cart">
+                                    <thead>
+                                    <tr>
+                                        <th class="product-remove">&nbsp;</th>
+                                        <th class="product-thumbnail">&nbsp;</th>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-price">Price</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @if(Cart::instance('saveForLater')->Count() > 0)
+                                        <h1>{{ Cart::instance('saveForLater')->Count() }} Product you added</h1>
+
+                                        @foreach(Cart::instance('saveForLater')->content() as $item)
+
+
+                                            <tr class="cart_item">
+
+                                                <form action="{{ route('saveForLater.destroy', $item->rowId) }}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                                <td class="product-remove">
+                                                    <form action="{{ route('saveForLater.destroy', $item->rowId) }}"
+                                                          method="POST">
+                                                        @csrf
+                                                        @method('delete')
+
+                                                        <button type="submit" class="cart-options">Remove</button>
+                                                    </form>
+
+                                                    <form
+                                                        action="{{ route('saveForLater.switchToCart', $item->rowId) }}"
+                                                        method="POST">
+                                                        @csrf
+
+                                                        <button type="submit" class="cart-options">Move to Cart
+                                                        </button>
+                                                    </form>
+                                                </td>
+
+                                                <td class="product-thumbnail">
+                                                    <a href="{{ route('shop.show', $item->model->slug) }}"><img
+                                                            width="145" height="145" alt="poster_1_up"
+                                                            class="shop_thumbnail" src="img/product-thumb-2.jpg"></a>
+                                                </td>
+
+                                                <td class="product-name">
+                                                    <a href="{{ route('shop.show', $item->model->slug) }}">{{ $item->model->name }}</a>
+                                                </td>
+
+                                                <td class="product-price">
+                                                    <span class="amount">${{ $item->model->price }}</span>
+                                                </td>
+                                                @endforeach
+
+
+                                                @else
+                                                    <h3>No saved Items</h3>
+                                                @endif
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="actions" colspan="6">
+                                                    <div class="coupon">
+                                                        <label for="coupon_code">Coupon:</label>
+                                                        <input type="text" placeholder="Coupon code" value=""
+                                                               id="coupon_code" class="input-text" name="coupon_code">
+                                                        <input type="submit" value="Apply Coupon" name="apply_coupon"
+                                                               class="button">
+                                                    </div>
+                                                    <input type="submit" value="Update Cart" name="update_cart"
+                                                           class="button">
+                                                    <input type="submit" value="Checkout" name="proceed"
+                                                           class="checkout-button button alt wc-forward">
+                                                </td>
+                                            </tr>
+
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
