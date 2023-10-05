@@ -156,8 +156,7 @@
                                             </div>
                                             <input type="submit" value="Update Cart" name="update_cart"
                                                    class="button">
-                                            <input type="submit" value="Checkout" name="proceed"
-                                                   class="checkout-button button alt wc-forward">
+                                            <a href="{{ route('checkout.index') }}" class="checkout-button button alt wc-for ward">Checkout</a>
                                         </td>
                                     </tr>
 
