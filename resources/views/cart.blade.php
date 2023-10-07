@@ -164,9 +164,6 @@
                                 </table>
                             </form>
 
-
-
-
                             <div class="cart-collaterals">
 
 
@@ -185,8 +182,7 @@
                                                 </a>
 
                                                 <a class="add_to_cart_button" data-quantity="1" data-product_sku=""
-                                                   data-product_id="22" rel="nofollow" href="single-product.html">Select
-                                                    options</a>
+                                                   data-product_id="22" rel="nofollow" href="{{ route('shop.show', $like->slug) }}">Select options</a>
                                             </li>
                                         @endforeach
                                     </ul>
