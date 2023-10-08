@@ -118,6 +118,24 @@
                                 <div class="clear"></div>
                             </form>
 
+                            @if (session()->has('success_message'))
+                                <div class="alert alert-success">
+                                    <ul>
+                                        {{ session()->get('success_message') }}
+                                    </ul>
+                                </div>
+                            @endif
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <form action="{{ route('checkout.store') }}" method="post" class="checkout" name="checkout">
                                 @csrf
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BillingSystem;
 use App\Models\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -28,25 +29,10 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function create(Request $request)
+    public function create(Request $request): \Illuminate\Http\RedirectResponse
     {
-        BillingSystem::create($request->all());
-//
-//        if ($billingSystem){
-//            $firstName = $billingSystem->billing_first_name;
-//            $lastName = $billingSystem->billing_last_name;
-//            $company = $billingSystem->billing_company;
-//            $adress1 = $billingSystem->billing_address_1;
-//            $city = $billingSystem->billing_city;
-//            $postCode = $billingSystem->billing_postcode;
-//            $email = $billingSystem->billing_email;
-//            $phone = $billingSystem->billing_phone;
-//
-//            $sendMessage = fopen();
-//        }
 
 
-        return redirect()->route('landing-page');
     }
 
     /**
@@ -57,7 +43,21 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'billing_first_name'=>'required',
+            'billing_last_name'=>'required',
+            'billing_company'=>'required',
+            'billing_address_1'=>'required',
+            'billing_address_2'=>'required',
+            'billing_city'=>'required',
+            'billing_email'=>'required',
+            'billing_phone'=>'required',
+        ]);
+
         BillingSystem::create($request->all());
+
+
+
 
 //        if ($billingSystem){
 //            $firstName = $billingSystem->billing_first_name;
@@ -73,7 +73,9 @@ class CheckoutController extends Controller
 //        }
 
 
-        return redirect()->route('landing-page');
+        Cart::instance('default')->destroy();
+
+        return redirect()->back()->with(['success_message'=>'Thank you for your Order!', 'danger_message'=>'Hello']);
     }
 
     /**
