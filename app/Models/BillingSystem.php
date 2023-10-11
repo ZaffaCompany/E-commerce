@@ -16,6 +16,10 @@ class BillingSystem extends Model
         'billing_city',
         'billing_postcode',
         'billing_email',
-        'billing_phone'
+        'billing_phone',
+        'products',
+        'subtotal',
+        'tax',
+        'total'
     ];
 }

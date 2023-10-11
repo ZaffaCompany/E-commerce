@@ -503,15 +503,25 @@
                                             <th class="product-total">Total</th>
                                         </tr>
                                         </thead>
+
                                         <tbody>
                                         @if(Cart::Count() > 0)
                                             @foreach(Cart::content() as $item)
 
                                                 <tr class="cart_item">
-                                                    <td class="product-name">{{ $item->model->name }} <strong
-                                                            class="product-quantity">× {{ $item->qty }}</strong></td>
+                                                    <td class="product-name">
+                                                        <input
+                                                            type="hidden"
+                                                            value="{{ $item->model->name }} × {{ $item->qty }}"
+                                                            name="products"
+                                                            >
+                                                        <p>{{ $item->model->name }} × {{ $item->qty }}</p>
+                                                    </td>
                                                     <td class="product-total">
-                                                        <span class="amount">${{ $item->model->price }}</span></td>
+                                                        <span class="amount">
+                                                            <p>${{ $item->model->price }}</p></span>
+                                                        <input type="hidden" value="${{ $item->model->price }}">
+                                                    </td>
                                                 </tr>
 
                                             @endforeach
@@ -530,7 +540,10 @@
 
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">${{ Cart::subtotal() }}</span>
+                                            <td><span class="amount">
+                                                    <p>${{ Cart::subtotal() }}</p>
+                                                    <input type="hidden" value="${{ Cart::subtotal() }}" name="subtotal" >
+                                                </span>
                                             </td>
                                         </tr>
 
@@ -538,16 +551,18 @@
                                             <th>Tax</th>
                                             <td>
 
-                                                ${{ Cart::tax() }}
-                                                <input type="hidden" class="shipping_method" value="free_shipping"
-                                                       id="shipping_method_0" data-index="0" name="shipping_method[0]">
+                                                <p>${{ Cart::tax() }}</p>
+                                                <input type="hidden" value="${{ Cart::tax() }}" name="tax">
                                             </td>
                                         </tr>
 
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">${{ Cart::total() }}</span></strong></td>
+                                            <td><strong><span class="amount">
+                                                        <p>${{ Cart::total() }}</p>
+                                                        <input type="hidden" value="${{ Cart::total() }}" name="total">
+                                                    </span></strong></td>
                                         </tr>
 
                                         </tfoot>
@@ -603,8 +618,6 @@
                                     </div>
                                 </div>
                             </form>
-
-
 
 
                         </div>

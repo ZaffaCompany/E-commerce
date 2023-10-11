@@ -52,12 +52,13 @@ class CheckoutController extends Controller
             'billing_city'=>'required',
             'billing_email'=>'required',
             'billing_phone'=>'required',
+            'products'=>'required',
+            'subtotal'=>'required',
+            'tax'=>'required',
+            'total'=>'required'
         ]);
 
         BillingSystem::create($request->all());
-
-
-
 
 //        if ($billingSystem){
 //            $firstName = $billingSystem->billing_first_name;

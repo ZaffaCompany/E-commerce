@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\ShopController;
 use Gloudemans\Shoppingcart\Facades\Cart;
