@@ -181,5 +181,7 @@
 <!-- Slider -->
 <script type="text/javascript" src="{{ asset('js/bxslider.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/script.slider.js') }}"></script>
+
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

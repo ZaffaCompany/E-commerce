@@ -25,6 +25,14 @@
                             </ul>
                         </div>
                     @endif
+
+                        @if (session()->has('errors'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {{ session()->get('errors') }}
+                                </ul>
+                            </div>
+                        @endif
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
                         <form action="#">
@@ -125,16 +133,24 @@
                                                 </td>
 
                                                 <td class="product-quantity">
-                                                    <div class="quantity buttons_added">
-                                                        <input type="button" class="minus" value="-">
-                                                        <input type="number" size="4" class="input-text qty text"
-                                                               title="Qty" value="1" min="0" step="1">
-                                                        <input type="button" class="plus" value="+">
+                                                    {{--                                                    <div class="quantity buttons_added">--}}
+                                                    {{--                                                        <input type="button" class="minus" value="-">--}}
+                                                    {{--                                                        <input type="number" size="4" class="input-text qty text"--}}
+                                                    {{--                                                               title="Qty" value="1" min="0" step="1">--}}
+                                                    {{--                                                        <input type="button" class="plus" value="+">--}}
+                                                    {{--                                                    </div>--}}
+
+                                                    <div class="buttons_added">
+                                                        <select class="quantity" data-id="{{ $item->rowId }}">
+                                                            @for($i = 1; $i < 5+1; $i++)
+                                                                <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                                            @endfor
+                                                        </select>
                                                     </div>
                                                 </td>
 
                                                 <td class="product-subtotal">
-                                                    <span class="amount">£15.00</span>
+                                                    <span class="amount">${{ $item->subtotal() }}</span>
                                                 </td>
                                         </tr>
                                         @endforeach
@@ -156,7 +172,8 @@
                                             </div>
                                             <input type="submit" value="Update Cart" name="update_cart"
                                                    class="button">
-                                            <a href="{{ route('checkout.index') }}" class="checkout-button button alt wc-for ward">Checkout</a>
+                                            <a href="{{ route('checkout.index') }}"
+                                               class="checkout-button button alt wc-for ward">Checkout</a>
                                         </td>
                                     </tr>
 
@@ -182,7 +199,8 @@
                                                 </a>
 
                                                 <a class="add_to_cart_button" data-quantity="1" data-product_sku=""
-                                                   data-product_id="22" rel="nofollow" href="{{ route('shop.show', $like->slug) }}">Select options</a>
+                                                   data-product_id="22" rel="nofollow"
+                                                   href="{{ route('shop.show', $like->slug) }}">Select options</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -211,8 +229,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-
 
 
                                 <form method="post" action="#" class="shipping_calculator">
@@ -495,8 +511,6 @@
                                 </form>
 
 
-
-
                             </div>
                             <h1>Save for later</h1>
                             <form method="post" action="#">
@@ -591,4 +605,34 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <script>
+        (function (){
+            const qty = document.querySelectorAll('.quantity');
+
+            Array.from(qty).forEach(function (element){
+                element.addEventListener('change', function (){
+                    const id = element.getAttribute('data-id')
+
+                    axios.patch(`/cart/${id}`, {
+                        quantity: this.value
+                    })
+                        .then(function (response) {
+                            window.location.href = '{{ route('cart.index') }}'
+                        })
+                        .catch(function (error) {
+                            window.location.href = '{{ route('cart.index') }}'
+                        });
+                })
+            })
+        })()
+    </script>
+
 </x-layout>
+
